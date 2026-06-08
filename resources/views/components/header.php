@@ -17,7 +17,8 @@ require_once __DIR__.'/../../../config/config.php';
                 <!-- Zichtbaar als je bent ingelogd -->
                 <a href="<?php echo $base_url; ?>/app/Http/Controllers/logoutController.php">Uitloggen</a>
             <?php else: ?>
-                <!-- Zichtbaar als je NIET bent ingelogd -->
+                <!-- Zichtbaar als je NIET bent ingelogd (Opdracht stap 6) -->
+                <a href="<?php echo $base_url; ?>/register.php">Registreren</a> |
                 <a href="<?php echo $base_url; ?>/resources/views/login/index.php">Inloggen</a>
             <?php endif; ?>
         </div>
