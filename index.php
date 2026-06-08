@@ -1,3 +1,11 @@
+<?php 
+// Start de sessie als deze nog niet actief is
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+// Laad de configuratie met $base_url
+require_once 'config/config.php'; 
+?>
 <!doctype html>
 <html lang="nl">
 

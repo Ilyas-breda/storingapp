@@ -8,40 +8,49 @@
 </head>
 
 <body>  
-    <?php require_once __DIR__.'/../components/header.php'; ?>
+<?php require_once __DIR__.'/../components/header.php'; ?>
 
-    <div class="container">
-        <h1>Meldingen</h1>
-        <a href="create.php">Nieuwe melding &gt;</a>
+<div class="container">
+    <h1>Meldingen</h1>
+    <a href="create.php">Nieuwe melding &gt;</a>
 
-        <?php if(isset($_GET['msg']))
-        {
-            echo "<div class='msg'>" . $_GET['msg'] . "</div>";
-        } ?>
-        <div style="height: 300px; background: #ededed; display: flex; justify-content: center; align-items: center;">
-        <div class="meldingen-overzicht">
-            <?php
-            require_once './../../config/conn.php';
- 
-            $query = "SELECT * FROM meldingen";
-            $statement = $conn->prepare($query);
-            $statement->execute();
-            $list = $statement->fetchAll(PDO::FETCH_ASSOC);
- 
-            foreach($list as $melding) {
-            ?>
- 
-            <?php
-        }
-        ?>
+    <?php 
+    if(isset($_GET['msg'])) {
+        echo "<div class='msg'>" . $_GET['msg'] . "</div>";
+    } 
+    ?>
+
+<?php
+// database verbinding
+require_once __DIR__.'/../../../config/conn.php';
+
+// query uitvoeren
+$query = "SELECT * FROM meldingen";
+$statement = $conn->prepare($query);
+$statement->execute();
+$meldingen = $statement->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<table>
+    <tr>
+        <th>Attractie</th>
+        <th>Type</th>
+        <th>Melder</th>
+        <th>Overige info</th>
+    </tr>
+
+<?php foreach($meldingen as $melding): ?>
+    <tr>
+        <td><?php echo $melding['attractie']; ?></td>
+        <td><?php echo $melding['type']; ?></td>
+        <td><?php echo $melding['melder']; ?></td>
+        <td><?php echo $melding['overige_info']; ?></td>
+    </tr>
+<?php endforeach; ?>
+
+</table>
+
 </div>
-</div>
-      
-        ?>
-</div>
-</div>
- 
 
 </body>
-
 </html>

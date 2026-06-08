@@ -1,4 +1,9 @@
-<?php require_once __DIR__.'/../../../config/config.php'; ?>
+<?php 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once __DIR__.'/../../../config/config.php'; 
+?>
 
 <header>
     <div class="container">
@@ -8,7 +13,13 @@
             <a href="<?php echo $base_url; ?>/resources/views/meldingen/index.php">Meldingen</a>
         </nav>
         <div>
-            <a href="#" style="color: lightgrey;">Inloggen</a>
+            <?php if(isset($_SESSION['user_id'])): ?>
+                <!-- Zichtbaar als je bent ingelogd -->
+                <a href="<?php echo $base_url; ?>/app/Http/Controllers/logoutController.php">Uitloggen</a>
+            <?php else: ?>
+                <!-- Zichtbaar als je NIET bent ingelogd -->
+                <a href="<?php echo $base_url; ?>/resources/views/login/index.php">Inloggen</a>
+            <?php endif; ?>
         </div>
     </div>
 </header>
